@@ -1,0 +1,3294 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'https://quiz.bojarm.pl/api'
+paths:
+  /answers:
+    get:
+      summary: 'Get list of answer objects'
+      description: 'Also return header response `X-Total-Count` containing the number of fetched objects.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Answer fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 1
+                      question_id: 1
+                      answer: 'Kaczej krwi'
+                      created_at: '2022-03-06T16:27:48.000000Z'
+                      updated_at: '2022-03-06T16:27:48.000000Z'
+                    -
+                      ...: []
+                  message: 'Objects fetched'
+                  count: 154
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        question_id: 1
+                        answer: 'Kaczej krwi'
+                        created_at: '2022-03-06T16:27:48.000000Z'
+                        updated_at: '2022-03-06T16:27:48.000000Z'
+                      -
+                        ...: []
+                    items:
+                      type: object
+                  message:
+                    type: string
+                    example: 'Objects fetched'
+                  count:
+                    type: integer
+                    example: 154
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Answers
+    post:
+      summary: 'Store new answer'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'Answer created'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    answer: odpowiedz
+                    question_id: 1
+                    updated_at: '2022-03-06T17:55:43.000000Z'
+                    created_at: '2022-03-06T17:55:43.000000Z'
+                    id: 155
+                  message: 'Object created.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      answer: odpowiedz
+                      question_id: 1
+                      updated_at: '2022-03-06T17:55:43.000000Z'
+                      created_at: '2022-03-06T17:55:43.000000Z'
+                      id: 155
+                  message:
+                    type: string
+                    example: 'Object created.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Answers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answer:
+                  type: string
+                  description: 'Must be at least 3 characters.'
+                  example: Odpowiedz
+                question_id:
+                  type: string
+                  description: ''
+                  example: '1'
+              required:
+                - answer
+                - question_id
+  '/answers/{id}':
+    get:
+      summary: 'Return specific answer by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Answer fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 1
+                    question_id: 1
+                    answer: 'Kaczej krwi'
+                    created_at: '2022-03-06T16:27:48.000000Z'
+                    updated_at: '2022-03-06T16:27:48.000000Z'
+                  message: 'Object fetched.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 1
+                      question_id: 1
+                      answer: 'Kaczej krwi'
+                      created_at: '2022-03-06T16:27:48.000000Z'
+                      updated_at: '2022-03-06T16:27:48.000000Z'
+                  message:
+                    type: string
+                    example: 'Object fetched.'
+        404:
+          description: 'Answer not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Answers
+    put:
+      summary: 'Update specific answer by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        304:
+          description: 'Answer not updated'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'No content'
+        200:
+          description: 'Answer fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 1
+                    question_id: 1
+                    answer: Odpowiedź
+                    created_at: '2022-03-06T16:27:48.000000Z'
+                    updated_at: '2022-03-06T18:01:47.000000Z'
+                  message: 'Object updated.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 1
+                      question_id: 1
+                      answer: Odpowiedź
+                      created_at: '2022-03-06T16:27:48.000000Z'
+                      updated_at: '2022-03-06T18:01:47.000000Z'
+                  message:
+                    type: string
+                    example: 'Object updated.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Answers
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answer:
+                  type: string
+                  description: 'Must be at least 3 characters.'
+                  example: Odpowiedz
+                question_id:
+                  type: string
+                  description: ''
+                  example: '1'
+    delete:
+      summary: 'Delete specific answer by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'Answer deleted'
+        404:
+          description: 'Answer not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Answers
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the answer.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/answers/{id}/question':
+    get:
+      summary: 'Get question which has specific answer'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Answer fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 1
+                    question_id: 1
+                    answer: 'Kaczej krwi'
+                    created_at: '2022-03-06T16:27:48.000000Z'
+                    updated_at: '2022-03-06T16:27:48.000000Z'
+                  message: 'Object fetched.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 1
+                      question_id: 1
+                      answer: 'Kaczej krwi'
+                      created_at: '2022-03-06T16:27:48.000000Z'
+                      updated_at: '2022-03-06T16:27:48.000000Z'
+                  message:
+                    type: string
+                    example: 'Object fetched.'
+        404:
+          description: 'Answer not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Answers
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the answer.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /register:
+    post:
+      summary: Registration
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'Registration success'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Registartion successfully'
+                  user:
+                    name: test4
+                    email: tes5125@example.com
+                    invited_by: 1
+                    updated_at: '2022-03-05T17:02:59.000000Z'
+                    created_at: '2022-03-05T17:02:59.000000Z'
+                    id: 8
+                  access_token: 5|HSdLJgrRJl0eW5nLXf6Tovi3LtzAMDO2ca4jAE7H
+                properties:
+                  message:
+                    type: string
+                    example: 'Registartion successfully'
+                  user:
+                    type: object
+                    example:
+                      name: test4
+                      email: tes5125@example.com
+                      invited_by: 1
+                      updated_at: '2022-03-05T17:02:59.000000Z'
+                      created_at: '2022-03-05T17:02:59.000000Z'
+                      id: 8
+                  access_token:
+                    type: string
+                    example: 5|HSdLJgrRJl0eW5nLXf6Tovi3LtzAMDO2ca4jAE7H
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+        403:
+          description: 'Registration limit reached'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Registration by invitation only'
+                properties:
+                  message:
+                    type: string
+                    example: 'Registration by invitation only'
+        404:
+          description: 'Invitation token not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Registration by invitation only'
+                properties:
+                  message:
+                    type: string
+                    example: 'Registration by invitation only'
+      tags:
+        - Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 55 characters.'
+                  example: test5
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: test@example.com
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: test123456
+                password_confirmation:
+                  type: string
+                  description: 'The value and <code>password</code> must match.'
+                  example: test123456
+                invitation:
+                  type: string
+                  description: 'Must be 20 characters.'
+                  example: y12rOwSuEDxuI3691N1v
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /login:
+    post:
+      summary: Login
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'Registration success'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  user:
+                    id: 1
+                    name: test
+                    email: test@example.com
+                    email_verified_at: '2022-03-05T16:50:14.000000Z'
+                    invited_by: null
+                    points: 0
+                    created_at: null
+                    updated_at: null
+                  access_token: 6|MBZpSBOTcdGUahuauv1nK2MrerF2xYfabqTLpfAm
+                properties:
+                  user:
+                    type: object
+                    example:
+                      id: 1
+                      name: test
+                      email: test@example.com
+                      email_verified_at: '2022-03-05T16:50:14.000000Z'
+                      invited_by: null
+                      points: 0
+                      created_at: null
+                      updated_at: null
+                  access_token:
+                    type: string
+                    example: 6|MBZpSBOTcdGUahuauv1nK2MrerF2xYfabqTLpfAm
+        404:
+          description: 'The given data was invalid'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'This User does not exist, check your details'
+                properties:
+                  message:
+                    type: string
+                    example: 'This User does not exist, check your details'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: test@example.com
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: test123456
+              required:
+                - email
+                - password
+      security: []
+  /categories:
+    get:
+      summary: 'Get list of category objects'
+      description: 'Also return header response `X-Total-Count` containing the number of fetched objects.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Category fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 1
+                      name: Jedzenie
+                      created_at: '2022-03-05T16:50:14.000000Z'
+                      updated_at: '2022-03-05T16:50:14.000000Z'
+                    -
+                      id: 2
+                      name: Zwierzęta
+                      created_at: '2022-03-05T16:50:14.000000Z'
+                      updated_at: '2022-03-05T16:50:14.000000Z'
+                  message: 'Objects fetched'
+                  count: 2
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: Jedzenie
+                        created_at: '2022-03-05T16:50:14.000000Z'
+                        updated_at: '2022-03-05T16:50:14.000000Z'
+                      -
+                        id: 2
+                        name: Zwierzęta
+                        created_at: '2022-03-05T16:50:14.000000Z'
+                        updated_at: '2022-03-05T16:50:14.000000Z'
+                    items:
+                      type: object
+                  message:
+                    type: string
+                    example: 'Objects fetched'
+                  count:
+                    type: integer
+                    example: 2
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Categories
+    post:
+      summary: 'Store new category'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'Category created'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    name: Kategoria
+                    updated_at: '2022-03-05T21:49:33.000000Z'
+                    created_at: '2022-03-05T21:49:33.000000Z'
+                    id: 3
+                  message: 'Object created.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      name: Kategoria
+                      updated_at: '2022-03-05T21:49:33.000000Z'
+                      created_at: '2022-03-05T21:49:33.000000Z'
+                      id: 3
+                  message:
+                    type: string
+                    example: 'Object created.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be at least 3 characters.'
+                  example: 'Nowa kategoria'
+              required:
+                - name
+  '/categories/{id}':
+    get:
+      summary: 'Return specific category by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Object fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 1
+                    name: Jedzenie
+                    created_at: '2022-03-05T16:50:14.000000Z'
+                    updated_at: '2022-03-05T16:50:14.000000Z'
+                  message: 'Object fetched.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 1
+                      name: Jedzenie
+                      created_at: '2022-03-05T16:50:14.000000Z'
+                      updated_at: '2022-03-05T16:50:14.000000Z'
+                  message:
+                    type: string
+                    example: 'Object fetched.'
+        404:
+          description: 'Object not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Object does not exist.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Object does not exist.'
+      tags:
+        - Categories
+    put:
+      summary: 'Update specific category by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        304:
+          description: 'Category not updated'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '[Empty response]'
+        200:
+          description: 'Category fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 1
+                    name: kategoria2
+                    created_at: '2022-03-05T16:50:14.000000Z'
+                    updated_at: '2022-03-06T01:54:51.000000Z'
+                  message: 'Object updated.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 1
+                      name: kategoria2
+                      created_at: '2022-03-05T16:50:14.000000Z'
+                      updated_at: '2022-03-06T01:54:51.000000Z'
+                  message:
+                    type: string
+                    example: 'Object updated.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be at least 3 characters.'
+                  example: Kategoria
+              required:
+                - name
+    delete:
+      summary: 'Delete specific category by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'Category deleted'
+        404:
+          description: 'Category not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Categories
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the category.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /users/current:
+    get:
+      summary: 'Return logged user object'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Object fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  user:
+                    id: 1
+                    name: test
+                    email: test@example.com
+                    email_verified_at: '2022-03-05T16:50:14.000000Z'
+                    invited_by: null
+                    points: 0
+                    created_at: null
+                    updated_at: null
+                properties:
+                  user:
+                    type: object
+                    example:
+                      id: 1
+                      name: test
+                      email: test@example.com
+                      email_verified_at: '2022-03-05T16:50:14.000000Z'
+                      invited_by: null
+                      points: 0
+                      created_at: null
+                      updated_at: null
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Operation about user'
+  /user/getInvitationToken:
+    get:
+      summary: 'Return invitation token for logged user'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Object fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  invitationToken: 5rZd84ES0iS3F7aHjSH0
+                properties:
+                  invitationToken:
+                    type: string
+                    example: 5rZd84ES0iS3F7aHjSH0
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Operation about user'
+  /user/uploadAvatar:
+    post:
+      summary: 'Upload user avatar'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Avatar updated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User avatar updated!'
+                  avatar_url: 'http://quiz.test/storage/user-avatar/F8fpXWsZSOI62QrVceWWMRdqrKPWwZf8APuAzPvY.png'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User avatar updated!'
+                  avatar_url:
+                    type: string
+                    example: 'http://quiz.test/storage/user-avatar/F8fpXWsZSOI62QrVceWWMRdqrKPWwZf8APuAzPvY.png'
+        422:
+          description: 'Avatar no updated'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    avatar:
+                      -
+                        min_width: 'The avatar width cannot be less than 100px'
+                        min_height: 'The avatar height cannot be less than 100px'
+                        max_width: 'The avatar width cannot be greater than 600px'
+                        max_height: 'The avatar height cannot be greater than 600px'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      avatar:
+                        -
+                          min_width: 'The avatar width cannot be less than 100px'
+                          min_height: 'The avatar height cannot be less than 100px'
+                          max_width: 'The avatar width cannot be greater than 600px'
+                          max_height: 'The avatar height cannot be greater than 600px'
+      tags:
+        - 'Operation about user'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+                  description: 'Must be an image.'
+              required:
+                - avatar
+  /user/getPlan:
+    get:
+      summary: 'Get user plan'
+      description: ''
+      parameters:
+        -
+          in: query
+          name: user_id
+          description: 'Specify user id to get his plans'
+          example: 0
+          required: false
+          schema:
+            type: integer
+            description: 'Specify user id to get his plans'
+            example: 0
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  subscriber_type: App\Models\User
+                  subscriber_id: 1
+                  plan_id: 1
+                  slug: main
+                  name: main
+                  description: null
+                  trial_ends_at: '2022-04-09T17:01:54.000000Z'
+                  starts_at: '2022-04-09T17:01:54.000000Z'
+                  ends_at: '2121-04-09T17:01:54.000000Z'
+                  cancels_at: null
+                  canceled_at: null
+                  timezone: null
+                  created_at: '2022-04-09T17:01:54.000000Z'
+                  updated_at: '2022-04-09T17:01:54.000000Z'
+                  deleted_at: null
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  subscriber_type:
+                    type: string
+                    example: App\Models\User
+                  subscriber_id:
+                    type: integer
+                    example: 1
+                  plan_id:
+                    type: integer
+                    example: 1
+                  slug:
+                    type: string
+                    example: main
+                  name:
+                    type: string
+                    example: main
+                  description:
+                    type: string
+                    example: null
+                  trial_ends_at:
+                    type: string
+                    example: '2022-04-09T17:01:54.000000Z'
+                  starts_at:
+                    type: string
+                    example: '2022-04-09T17:01:54.000000Z'
+                  ends_at:
+                    type: string
+                    example: '2121-04-09T17:01:54.000000Z'
+                  cancels_at:
+                    type: string
+                    example: null
+                  canceled_at:
+                    type: string
+                    example: null
+                  timezone:
+                    type: string
+                    example: null
+                  created_at:
+                    type: string
+                    example: '2022-04-09T17:01:54.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2022-04-09T17:01:54.000000Z'
+                  deleted_at:
+                    type: string
+                    example: null
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Operation about user'
+  /user/getInvitedUsers:
+    get:
+      summary: 'Get list of invited users'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 4
+                      name: Jannnn
+                      is_premium: true
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 4
+                        name: Jannnn
+                        is_premium: true
+                    items:
+                      type: object
+      tags:
+        - 'Operation about user'
+  /user/stats:
+    get:
+      summary: 'Return user stats'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Stats fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    correct_answers: 3
+                    incorrect_answers: 1
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      correct_answers: 3
+                      incorrect_answers: 1
+        404:
+          description: 'Stats not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - 'Operation about user'
+  /questions:
+    get:
+      summary: 'Get list of question objects'
+      description: 'Also return header response `X-Total-Count` containing the number of fetched objects.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Question fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 1
+                      quiz_id: 1
+                      question: 'Utożsamiana z rekuzą i czarną polewką czernina to zupa na bazie:'
+                      correct_answer_id: 1
+                      created_at: '2022-03-06T16:22:31.000000Z'
+                      updated_at: '2022-03-06T16:22:31.000000Z'
+                    -
+                      ...: []
+                  message: 'Objects fetched'
+                  count: 42
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        quiz_id: 1
+                        question: 'Utożsamiana z rekuzą i czarną polewką czernina to zupa na bazie:'
+                        correct_answer_id: 1
+                        created_at: '2022-03-06T16:22:31.000000Z'
+                        updated_at: '2022-03-06T16:22:31.000000Z'
+                      -
+                        ...: []
+                    items:
+                      type: object
+                  message:
+                    type: string
+                    example: 'Objects fetched'
+                  count:
+                    type: integer
+                    example: 42
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Questions
+    post:
+      summary: 'Store new question'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'Question created'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    question: Kategoria
+                    quiz_id: 1
+                    updated_at: '2022-03-06T17:23:30.000000Z'
+                    created_at: '2022-03-06T17:23:30.000000Z'
+                    id: 43
+                  message: 'Object created.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      question: Kategoria
+                      quiz_id: 1
+                      updated_at: '2022-03-06T17:23:30.000000Z'
+                      created_at: '2022-03-06T17:23:30.000000Z'
+                      id: 43
+                  message:
+                    type: string
+                    example: 'Object created.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: ''
+                  example: Kategoria
+                quiz_id:
+                  type: string
+                  description: ''
+                  example: '1'
+                category_id:
+                  type: string
+                  description: ''
+                  example: '1'
+              required:
+                - question
+                - quiz_id
+                - category_id
+  '/questions/{id}':
+    get:
+      summary: 'Return specific question by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Question fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 2
+                    quiz_id: 1
+                    question: 'Żurek od białego barszczu różni się przede wszystkim:'
+                    correct_answer_id: 5
+                    created_at: '2022-03-06T16:22:31.000000Z'
+                    updated_at: '2022-03-06T16:22:31.000000Z'
+                  message: 'Object fetched.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      quiz_id: 1
+                      question: 'Żurek od białego barszczu różni się przede wszystkim:'
+                      correct_answer_id: 5
+                      created_at: '2022-03-06T16:22:31.000000Z'
+                      updated_at: '2022-03-06T16:22:31.000000Z'
+                  message:
+                    type: string
+                    example: 'Object fetched.'
+        404:
+          description: 'Question not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Questions
+    put:
+      summary: 'Update specific question by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        304:
+          description: 'Question not updated'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'No content'
+        200:
+          description: 'Question fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 43
+                    quiz_id: 1
+                    question: Kategoria
+                    correct_answer_id: null
+                    created_at: '2022-03-06T17:23:30.000000Z'
+                    updated_at: '2022-03-06T17:25:10.000000Z'
+                  message: 'Object updated.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 43
+                      quiz_id: 1
+                      question: Kategoria
+                      correct_answer_id: null
+                      created_at: '2022-03-06T17:23:30.000000Z'
+                      updated_at: '2022-03-06T17:25:10.000000Z'
+                  message:
+                    type: string
+                    example: 'Object updated.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: 'Must be at least 3 characters.'
+                  example: Kategoria
+                category_id:
+                  type: string
+                  description: ''
+                  example: '1'
+              required:
+                - question
+    delete:
+      summary: 'Delete specific question by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'Question deleted'
+        404:
+          description: 'Question not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Something is wrong. Please check your request'
+                properties:
+                  message:
+                    type: string
+                    example: 'Something is wrong. Please check your request'
+      tags:
+        - Questions
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the question.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/questions/{id}/answers':
+    get:
+      summary: 'Get list of answers belongs to question'
+      description: 'Also return header response `X-Total-Count` containing the number of fetched objects.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Question fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 1
+                      quiz_id: 1
+                      question: 'Utożsamiana z rekuzą i czarną polewką czernina to zupa na bazie:'
+                      correct_answer_id: 1
+                      created_at: '2022-03-06T16:22:31.000000Z'
+                      updated_at: '2022-03-06T16:22:31.000000Z'
+                    -
+                      ...: []
+                  message: 'Objects fetched'
+                  count: 42
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        quiz_id: 1
+                        question: 'Utożsamiana z rekuzą i czarną polewką czernina to zupa na bazie:'
+                        correct_answer_id: 1
+                        created_at: '2022-03-06T16:22:31.000000Z'
+                        updated_at: '2022-03-06T16:22:31.000000Z'
+                      -
+                        ...: []
+                    items:
+                      type: object
+                  message:
+                    type: string
+                    example: 'Objects fetched'
+                  count:
+                    type: integer
+                    example: 42
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Questions
+    delete:
+      summary: 'Delete answers belongs to question'
+      description: 'Also return header response `X-Total-Count` containing the number of deleted objects.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'Question deleted'
+        404:
+          description: 'Question not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Something is wrong. Please check your request'
+                properties:
+                  message:
+                    type: string
+                    example: 'Something is wrong. Please check your request'
+      tags:
+        - Questions
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the question.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/quiz/{quiz}/start':
+    get:
+      summary: 'Start quiz'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    submission_id: 4
+                    next_question:
+                      id: 14
+                      question: 'Zwinięty w rulon marynowany śledź to:'
+                      answers:
+                        -
+                          id: 52
+                          answer: Rolmops
+                        -
+                          id: 53
+                          answer: Pikiel
+                        -
+                          id: 54
+                          answer: Zwijka
+                        -
+                          id: 55
+                          answer: Sałaka
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      submission_id: 4
+                      next_question:
+                        id: 14
+                        question: 'Zwinięty w rulon marynowany śledź to:'
+                        answers:
+                          -
+                            id: 52
+                            answer: Rolmops
+                          -
+                            id: 53
+                            answer: Pikiel
+                          -
+                            id: 54
+                            answer: Zwijka
+                          -
+                            id: 55
+                            answer: Sałaka
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Quiz
+    parameters:
+      -
+        in: path
+        name: quiz
+        description: 'The ID of the Quiz.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  '/quiz/submission/{quiz_submission}/answerQuestion':
+    post:
+      summary: 'Answer question'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    submission_id: 1
+                    is_correct: 1
+                    next_question:
+                      id: 14
+                      question: 'Zwinięty w rulon marynowany śledź to:'
+                      answers:
+                        -
+                          id: 52
+                          answer: Rolmops
+                        -
+                          id: 53
+                          answer: Pikiel
+                        -
+                          id: 54
+                          answer: Zwijka
+                        -
+                          id: 55
+                          answer: Sałaka
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      submission_id: 1
+                      is_correct: 1
+                      next_question:
+                        id: 14
+                        question: 'Zwinięty w rulon marynowany śledź to:'
+                        answers:
+                          -
+                            id: 52
+                            answer: Rolmops
+                          -
+                            id: 53
+                            answer: Pikiel
+                          -
+                            id: 54
+                            answer: Zwijka
+                          -
+                            id: 55
+                            answer: Sałaka
+        401:
+          description: Unathorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: Unauthorized
+                  data: 'You cannot do this'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Unauthorized
+                  data:
+                    type: string
+                    example: 'You cannot do this'
+      tags:
+        - Quiz
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question_id:
+                  type: integer
+                  description: 'The ID of the Question.'
+                  example: 15
+                answer_id:
+                  type: integer
+                  description: 'The ID of the Answer.'
+                  example: 1
+              required:
+                - question_id
+                - answer_id
+    parameters:
+      -
+        in: path
+        name: quiz_submission
+        description: 'The ID of the Quiz Submission.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /quizzes:
+    get:
+      summary: 'Get list of quiz objects'
+      description: 'Also return header response `X-Total-Count` containing the number of fetched objects.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Quiz fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 1
+                      category_id: 1
+                      title: 'Jak dobrze znasz kuchnię polską?'
+                      description: 'Jaka jest Twoja znajomość tradycyjnych polskich potraw?'
+                      created_at: '2022-04-05T18:32:52.000000Z'
+                      updated_at: '2022-04-05T18:32:52.000000Z'
+                    -
+                      ...: []
+                  message: 'Objects fetched'
+                  count: 4
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        category_id: 1
+                        title: 'Jak dobrze znasz kuchnię polską?'
+                        description: 'Jaka jest Twoja znajomość tradycyjnych polskich potraw?'
+                        created_at: '2022-04-05T18:32:52.000000Z'
+                        updated_at: '2022-04-05T18:32:52.000000Z'
+                      -
+                        ...: []
+                    items:
+                      type: object
+                  message:
+                    type: string
+                    example: 'Objects fetched'
+                  count:
+                    type: integer
+                    example: 4
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Quizzes
+    post:
+      summary: 'Store new quiz'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'Quiz created'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    category_id: '2'
+                    title: 'Quiz title'
+                    description: 'Opis quizu'
+                    image_path: '"image_path": "ZWOHE9x8tECor79BosSvF9efGKoeKoJg10gpMwyl.png",'
+                    updated_at: '2022-04-06T21:07:49.000000Z'
+                    created_at: '2022-04-06T21:07:49.000000Z'
+                    id: 5
+                  message: 'Object created.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      category_id: '2'
+                      title: 'Quiz title'
+                      description: 'Opis quizu'
+                      image_path: '"image_path": "ZWOHE9x8tECor79BosSvF9efGKoeKoJg10gpMwyl.png",'
+                      updated_at: '2022-04-06T21:07:49.000000Z'
+                      created_at: '2022-04-06T21:07:49.000000Z'
+                      id: 5
+                  message:
+                    type: string
+                    example: 'Object created.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Quizzes
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: string
+                  description: 'The id of the quiz category.'
+                  example: 2
+                title:
+                  type: string
+                  description: 'The title of the quiz category. Must be at least 3 characters.'
+                  example: 'Quiz title'
+                description:
+                  type: string
+                  description: 'The description of the quiz.'
+                  example: 'Quiz description'
+                image:
+                  type: string
+                  format: binary
+                  description: 'The image of the quiz. Must be an image.'
+              required:
+                - title
+  '/quizzes/{id}':
+    get:
+      summary: 'Return specific quiz by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Quiz fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 2
+                    category_id: 1
+                    title: 'Czy wiesz, co jesz?'
+                    description: 'Czy znasz nazwy klasycznych i mniej klasycznych potraw?'
+                    created_at: '2022-04-05T18:32:52.000000Z'
+                    updated_at: '2022-04-05T18:32:52.000000Z'
+                  message: 'Object fetched.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      category_id: 1
+                      title: 'Czy wiesz, co jesz?'
+                      description: 'Czy znasz nazwy klasycznych i mniej klasycznych potraw?'
+                      created_at: '2022-04-05T18:32:52.000000Z'
+                      updated_at: '2022-04-05T18:32:52.000000Z'
+                  message:
+                    type: string
+                    example: 'Object fetched.'
+        404:
+          description: 'Quiz not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Quizzes
+    put:
+      summary: 'Update specific quiz by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        304:
+          description: 'Quiz not updated'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'No content'
+        200:
+          description: 'Quiz fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 2
+                    category_id: 2
+                    title: 'Quiz title'
+                    description: 'Quiz description'
+                    created_at: '2022-04-05T18:32:52.000000Z'
+                    updated_at: '2022-04-06T21:24:16.000000Z'
+                    category:
+                      id: 2
+                      name: Zwierzęta
+                      created_at: '2022-04-05T18:32:52.000000Z'
+                      updated_at: '2022-04-05T18:32:52.000000Z'
+                  message: 'Object updated.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      category_id: 2
+                      title: 'Quiz title'
+                      description: 'Quiz description'
+                      created_at: '2022-04-05T18:32:52.000000Z'
+                      updated_at: '2022-04-06T21:24:16.000000Z'
+                      category:
+                        id: 2
+                        name: Zwierzęta
+                        created_at: '2022-04-05T18:32:52.000000Z'
+                        updated_at: '2022-04-05T18:32:52.000000Z'
+                  message:
+                    type: string
+                    example: 'Object updated.'
+        422:
+          description: 'Validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    field:
+                      - 'validation message error'
+                    ...: []
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    example:
+                      field:
+                        - 'validation message error'
+                      ...: []
+      tags:
+        - Quizzes
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: string
+                  description: 'The id of the quiz category.'
+                  example: 2
+                title:
+                  type: string
+                  description: 'The title of the quiz category. Must be at least 3 characters.'
+                  example: 'Quiz title'
+                description:
+                  type: string
+                  description: 'The description of the quiz.'
+                  example: 'Quiz description'
+                image:
+                  type: string
+                  format: binary
+                  description: 'The image of the quiz. Must be an image.'
+              required:
+                - title
+    delete:
+      summary: 'Delete specific quiz by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'Quiz deleted'
+        404:
+          description: 'Quiz not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Quizzes
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the quiz.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  '/quizzes/{id}/questions':
+    get:
+      summary: 'Get list of questions belongs to quiz'
+      description: 'Also return header response `X-Total-Count` containing the number of fetched objects.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Question fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    -
+                      id: 1
+                      quiz_id: 1
+                      question: 'Utożsamiana z rekuzą i czarną polewką czernina to zupa na bazie:'
+                      correct_answer_id: 1
+                      created_at: '2022-03-06T16:22:31.000000Z'
+                      updated_at: '2022-03-06T16:22:31.000000Z'
+                    -
+                      ...: []
+                  message: 'Objects fetched'
+                  count: 42
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        quiz_id: 1
+                        question: 'Utożsamiana z rekuzą i czarną polewką czernina to zupa na bazie:'
+                        correct_answer_id: 1
+                        created_at: '2022-03-06T16:22:31.000000Z'
+                        updated_at: '2022-03-06T16:22:31.000000Z'
+                      -
+                        ...: []
+                    items:
+                      type: object
+                  message:
+                    type: string
+                    example: 'Objects fetched'
+                  count:
+                    type: integer
+                    example: 42
+        401:
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Quizzes
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the quiz.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/quiz/{quiz}':
+    get:
+      summary: 'Return specific quiz by ID'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Quiz fetched'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    id: 2
+                    category_id: 1
+                    title: 'Czy wiesz, co jesz?'
+                    description: 'Czy znasz nazwy klasycznych i mniej klasycznych potraw?'
+                    created_at: '2022-04-05T18:32:52.000000Z'
+                    updated_at: '2022-04-05T18:32:52.000000Z'
+                  message: 'Object fetched.'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      category_id: 1
+                      title: 'Czy wiesz, co jesz?'
+                      description: 'Czy znasz nazwy klasycznych i mniej klasycznych potraw?'
+                      created_at: '2022-04-05T18:32:52.000000Z'
+                      updated_at: '2022-04-05T18:32:52.000000Z'
+                  message:
+                    type: string
+                    example: 'Object fetched.'
+        404:
+          description: 'Quiz not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Resource not found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Resource not found'
+      tags:
+        - Quizzes
+    parameters:
+      -
+        in: path
+        name: quiz
+        description: ''
+        example: 1
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: id
+        description: 'The ID of the quiz.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /user/settings:
+    get:
+      summary: 'Display user settings.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  personal:
+                    name: zxc
+                    surname: null
+                    email: test@example.com
+                    phone: '111 225 111'
+                  company:
+                    name: TEST2
+                    nip: '8213622586'
+                    regon: '236170890'
+                    address:
+                      id: 4
+                      addressable_type: App\Models\Company
+                      addressable_id: 3
+                      city: asdasd2
+                      postcode: 22-222
+                      street: asdasdcxz
+                      building_number: '55'
+                      house_number: '12'
+                      created_at: '2022-04-19T18:42:02.000000Z'
+                      updated_at: '2022-04-19T19:16:10.000000Z'
+                  financial:
+                    iban: PL65802510332533324434431256
+                    bank_name: 'BANK MILLENIUM SA'
+                    swift: BIGBPLPW
+                properties:
+                  personal:
+                    type: object
+                    example:
+                      name: zxc
+                      surname: null
+                      email: test@example.com
+                      phone: '111 225 111'
+                  company:
+                    type: object
+                    example:
+                      name: TEST2
+                      nip: '8213622586'
+                      regon: '236170890'
+                      address:
+                        id: 4
+                        addressable_type: App\Models\Company
+                        addressable_id: 3
+                        city: asdasd2
+                        postcode: 22-222
+                        street: asdasdcxz
+                        building_number: '55'
+                        house_number: '12'
+                        created_at: '2022-04-19T18:42:02.000000Z'
+                        updated_at: '2022-04-19T19:16:10.000000Z'
+                  financial:
+                    type: object
+                    example:
+                      iban: PL65802510332533324434431256
+                      bank_name: 'BANK MILLENIUM SA'
+                      swift: BIGBPLPW
+      tags:
+        - Settings
+    post:
+      summary: 'Update user settings.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    personal:
+                      name: zxc
+                      surname: null
+                      email: test@example.com
+                      phone: '111 225 111'
+                    company:
+                      name: TEST2
+                      nip: '8213622586'
+                      regon: '236170890'
+                      address:
+                        city: asdasd2
+                        postcode: 22-222
+                        street: asdasdcxz
+                        building_number: '55'
+                        house_number: '12'
+                    financial:
+                      bank_name: 'BANK MILLENIUM SA'
+                      iban: PL65802510332533324434431256
+                      swift: BIGBPLPW
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    example:
+                      personal:
+                        name: zxc
+                        surname: null
+                        email: test@example.com
+                        phone: '111 225 111'
+                      company:
+                        name: TEST2
+                        nip: '8213622586'
+                        regon: '236170890'
+                        address:
+                          city: asdasd2
+                          postcode: 22-222
+                          street: asdasdcxz
+                          building_number: '55'
+                          house_number: '12'
+                      financial:
+                        bank_name: 'BANK MILLENIUM SA'
+                        iban: PL65802510332533324434431256
+                        swift: BIGBPLPW
+      tags:
+        - Settings
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: quo
+                surname:
+                  type: string
+                  description: ''
+                  example: omnis
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: cletus.feil@example.net
+                phone:
+                  type: array
+                  description: 'Must be 3 digits.'
+                  example:
+                    - '559'
+                  items:
+                    type: string
+                company_name:
+                  type: string
+                  description: 'This field is required when <code>nip</code>, <code>regon</code>, <code>city</code>, <code>postcode</code>, <code>street</code>, <code>building_number</code>, or <code>house_number</code> is present.'
+                  example: ducimus
+                nip:
+                  type: string
+                  description: 'This field is required when <code>company_name</code>, <code>regon</code>, <code>city</code>, <code>postcode</code>, <code>street</code>, <code>building_number</code>, or <code>house_number</code> is present.'
+                  example: null
+                regon:
+                  type: string
+                  description: 'This field is required when <code>nip</code>, <code>company_name</code>, <code>city</code>, <code>postcode</code>, <code>street</code>, <code>building_number</code>, or <code>house_number</code> is present.'
+                  example: null
+                city:
+                  type: string
+                  description: 'This field is required when <code>company_name</code>, <code>nip</code>, <code>regon</code>, <code>postcode</code>, <code>street</code>, <code>building_number</code>, or <code>house_number</code> is present. Must be at least 3 characters.'
+                  example: zg
+                postcode:
+                  type: string
+                  description: 'This field is required when <code>company_name</code>, <code>nip</code>, <code>regon</code>, <code>city</code>, <code>street</code>, <code>building_number</code>, or <code>house_number</code> is present.'
+                  example: null
+                street:
+                  type: string
+                  description: 'This field is required when <code>company_name</code>, <code>nip</code>, <code>regon</code>, <code>city</code>, <code>postcode</code>, <code>building_number</code>, or <code>house_number</code> is present. Must be at least 3 characters.'
+                  example: ''
+                building_number:
+                  type: string
+                  description: 'This field is required when <code>company_name</code>, <code>nip</code>, <code>regon</code>, <code>city</code>, <code>postcode</code>, <code>street</code>, or <code>house_number</code> is present. Must not be greater than 5 characters.'
+                  example: heqw
+                house_number:
+                  type: string
+                  description: 'This field is required when <code>company_name</code>, <code>nip</code>, <code>regon</code>, <code>city</code>, <code>postcode</code>, <code>street</code>, or <code>building_number</code> is present. Must not be greater than 5 characters.'
+                  example: v
+                iban:
+                  type: string
+                  description: 'This field is required when <code>bank_name</code> or <code>swift</code> is present.'
+                  example: null
+                bank_name:
+                  type: string
+                  description: 'This field is required when <code>iban</code> or <code>swift</code> is present.'
+                  example: asperiores
+                swift:
+                  type: string
+                  description: 'This field is required when <code>iban</code> or <code>bank_name</code> is present.'
+                  example: null
+tags:
+  -
+    name: Answers
+    description: "\nEndpoints about `category` objects"
+  -
+    name: Authorization
+    description: ''
+  -
+    name: Categories
+    description: "\nEndpoints about `category` objects"
+  -
+    name: 'Operation about user'
+    description: ''
+  -
+    name: Questions
+    description: "\nEndpoints about `question` objects"
+  -
+    name: Quiz
+    description: ''
+  -
+    name: Quizzes
+    description: "\nEndpoints about `quiz` objects"
+  -
+    name: Settings
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "WorkSans";
+  src: url("./fonts/WorkSans/static/WorkSans-Regular.ttf");
+  /* font-weight: 400; */
+  font-style: normal;
+}
+
+@layer utilities {
+  .kontener {
+    background-color: #ffffff;
+
+    border: 1px solid #ededed;
+
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+    // padding: 2.5rem; /* 40px */
+  }
+  .kontener-rounded {
+    border-radius: 1.5625rem; /* 25px */
+  }
+}
+
+$color-primary-brand: #ed4b9e; // CTAs, Focused/Active states
+$color-secondary-brand: #4b4ded; // Links
+$color-tertiary-brand: #f3d9da; // Accenting, Illustrations
+$color-dark: #0e0e2c; // Overlays, Shadows, Headings
+$color-success: #ed4b9e; // Valid fields, Success messages
+$color-text: #4a4a68; // Body text
+$color-subtle-text: #8c9ca1; // Helper text, Deemphasized text
+$color-hover-color: #43ddff;
+$color-background: #f6f7f9;
+
+body {
+  font-family: "WorkSans", sans-serif;
+  // color: $color-text;
+  background-color: $color-background;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.shadow-items-homepage {
+  box-shadow: -9px 10px 29px 4px rgba(0, 0, 0, 0.04); // color according to figma
+  // box-shadow: -9px 10px 29px 4px rgba(0, 0, 0, 0.04);
+}
+
+.checkbox-label {
+  display: block;
+  position: relative;
+  margin: auto;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 24px;
+  height: 24px;
+  width: 24px;
+  clear: both;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease-out;
+  border: 2px solid #ffffff;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom {
+  background-color: #ffffff;
+  border-radius: 5px;
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  border: 2px solid #ffffff;
+}
+
+.checkbox-label .checkbox-custom::after {
+  position: absolute;
+  content: "";
+  left: 12px;
+  top: 12px;
+  height: 0px;
+  width: 0px;
+  border-radius: 5px;
+  border: solid #009bff;
+  border-width: 0 3px 3px 0;
+  transform: rotate(0deg) scale(0);
+  opacity: 1;
+  transition: all 0.3s ease-out;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+  left: 8px;
+  top: 3px;
+  width: 6px;
+  height: 12px;
+  border: solid #009bff;
+  border-width: 0 2px 2px 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.rounded-5 {
+  border-radius: 2rem;
+}
+
+input[type="number"].show-spin::-webkit-inner-spin-button {
+  opacity: 1;
+}
+// .btn-mydr-pp{
+//  background-image:  url('https://urmed.pl/wp-content/uploads/2021/10/xwajszczukNew.png.pagespeed.ic.aeXJUXOH9-.webp');
+
+// }
+// input#file-upload-button{
+// background-color: #009bff;
+
+// }
+
+input#upload_img {
+  display: inline-block;
+  width: 100%;
+  padding: 500px 0 0 0;
+  height: 500px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  // background: url('/wgrajquiz.svg') center center no-repeat;
+  background-size: 100%;
+  border-radius: 20px;
+}
+ul#invite {
+  list-style-image: url("/fajka.png");
+}
+ul#invitedeleted {
+  list-style-image: url("/deleted_fajka.png");
+}
+
+div#access-modal {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+div#access-modal-window {
+  display: flex;
+}
+
+div#access-modal-window div {
+  align-self: center;
+}
+
+div#buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  div#buttons-wrapper {
+    flex-direction: column-reverse;
+  }
+}
+
+button#access-button {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+  button#access-button {
+    max-height: 40px;
+  }
+}

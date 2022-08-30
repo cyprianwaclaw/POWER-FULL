@@ -1,0 +1,1770 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "https:\/\/quiz.bojarm.pl\/api"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "d425b7c4-178c-45f6-b729-c59ab854137b",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Answers",
+            "description": "\nEndpoints about `category` objects",
+            "item": [
+                {
+                    "name": "Get list of answer objects",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/answers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/answers"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Also return header response `X-Total-Count` containing the number of fetched objects."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"question_id\": 1,\n            \"answer\": \"Kaczej krwi\",\n            \"created_at\": \"2022-03-06T16:27:48.000000Z\",\n            \"updated_at\": \"2022-03-06T16:27:48.000000Z\"\n        },\n        {\n            \"...\": []\n        }\n    ],\n    \"message\": \"Objects fetched\",\n    \"count\": 154\n}\n",
+                            "name": "Answer fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store new answer",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/answers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/answers"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"answer\":\"Odpowiedz\",\"question_id\":\"1\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"answer\": \"odpowiedz\",\n        \"question_id\": 1,\n        \"updated_at\": \"2022-03-06T17:55:43.000000Z\",\n        \"created_at\": \"2022-03-06T17:55:43.000000Z\",\n        \"id\": 155\n    },\n    \"message\": \"Object created.\"\n}\n",
+                            "name": "Answer created"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Return specific answer by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/answers\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/answers\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the answer."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"question_id\": 1,\n        \"answer\": \"Kaczej krwi\",\n        \"created_at\": \"2022-03-06T16:27:48.000000Z\",\n        \"updated_at\": \"2022-03-06T16:27:48.000000Z\"\n    },\n    \"message\": \"Object fetched.\"\n}\n",
+                            "name": "Answer fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Answer not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update specific answer by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/answers\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/answers\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the answer."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"answer\":\"Odpowiedz\",\"question_id\":\"1\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 304,
+                            "body": "No content",
+                            "name": "Answer not updated"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"question_id\": 1,\n        \"answer\": \"Odpowied\u017a\",\n        \"created_at\": \"2022-03-06T16:27:48.000000Z\",\n        \"updated_at\": \"2022-03-06T18:01:47.000000Z\"\n    },\n    \"message\": \"Object updated.\"\n}\n",
+                            "name": "Answer fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete specific answer by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/answers\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/answers\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "The ID of the answer."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "[Empty response]",
+                            "name": "Answer deleted"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Answer not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get question which has specific answer",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/answers\/:id\/question",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/answers\/:id\/question",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the answer."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"question_id\": 1,\n        \"answer\": \"Kaczej krwi\",\n        \"created_at\": \"2022-03-06T16:27:48.000000Z\",\n        \"updated_at\": \"2022-03-06T16:27:48.000000Z\"\n    },\n    \"message\": \"Object fetched.\"\n}\n",
+                            "name": "Answer fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Answer not found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Authorization",
+            "description": "",
+            "item": [
+                {
+                    "name": "Registration",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"test5\",\"email\":\"test@example.com\",\"password\":\"test123456\",\"password_confirmation\":\"test123456\",\"invitation\":\"y12rOwSuEDxuI3691N1v\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"message\": \"Registartion successfully\",\n    \"user\": {\n        \"name\": \"test4\",\n        \"email\": \"tes5125@example.com\",\n        \"invited_by\": 1,\n        \"updated_at\": \"2022-03-05T17:02:59.000000Z\",\n        \"created_at\": \"2022-03-05T17:02:59.000000Z\",\n        \"id\": 8\n    },\n    \"access_token\": \"5|HSdLJgrRJl0eW5nLXf6Tovi3LtzAMDO2ca4jAE7H\"\n}\n",
+                            "name": "Registration success"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n    \"message\": \"Registration by invitation only\"\n}\n",
+                            "name": "Registration limit reached"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Registration by invitation only\"\n}\n",
+                            "name": "Invitation token not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"test@example.com\",\"password\":\"test123456\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"test\",\n        \"email\": \"test@example.com\",\n        \"email_verified_at\": \"2022-03-05T16:50:14.000000Z\",\n        \"invited_by\": null,\n        \"points\": 0,\n        \"created_at\": null,\n        \"updated_at\": null\n    },\n    \"access_token\": \"6|MBZpSBOTcdGUahuauv1nK2MrerF2xYfabqTLpfAm\"\n}\n",
+                            "name": "Registration success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"This User does not exist, check your details\"\n}\n",
+                            "name": "The given data was invalid"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Categories",
+            "description": "\nEndpoints about `category` objects",
+            "item": [
+                {
+                    "name": "Get list of category objects",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/categories",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/categories"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Also return header response `X-Total-Count` containing the number of fetched objects."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Jedzenie\",\n            \"created_at\": \"2022-03-05T16:50:14.000000Z\",\n            \"updated_at\": \"2022-03-05T16:50:14.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Zwierz\u0119ta\",\n            \"created_at\": \"2022-03-05T16:50:14.000000Z\",\n            \"updated_at\": \"2022-03-05T16:50:14.000000Z\"\n        }\n    ],\n    \"message\": \"Objects fetched\",\n    \"count\": 2\n}\n",
+                            "name": "Category fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store new category",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/categories",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/categories"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Nowa kategoria\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"name\": \"Kategoria\",\n        \"updated_at\": \"2022-03-05T21:49:33.000000Z\",\n        \"created_at\": \"2022-03-05T21:49:33.000000Z\",\n        \"id\": 3\n    },\n    \"message\": \"Object created.\"\n}\n",
+                            "name": "Category created"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Return specific category by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Jedzenie\",\n        \"created_at\": \"2022-03-05T16:50:14.000000Z\",\n        \"updated_at\": \"2022-03-05T16:50:14.000000Z\"\n    },\n    \"message\": \"Object fetched.\"\n}\n",
+                            "name": "Object fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"success\": false,\n    \"message\": \"Object does not exist.\"\n}\n",
+                            "name": "Object not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update specific category by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Kategoria\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 304,
+                            "body": "[Empty response]",
+                            "name": "Category not updated"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"kategoria2\",\n        \"created_at\": \"2022-03-05T16:50:14.000000Z\",\n        \"updated_at\": \"2022-03-06T01:54:51.000000Z\"\n    },\n    \"message\": \"Object updated.\"\n}\n",
+                            "name": "Category fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete specific category by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "[Empty response]",
+                            "name": "Category deleted"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Category not found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Operation about user",
+            "description": "",
+            "item": [
+                {
+                    "name": "Return logged user object",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/users\/current",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/users\/current"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"test\",\n        \"email\": \"test@example.com\",\n        \"email_verified_at\": \"2022-03-05T16:50:14.000000Z\",\n        \"invited_by\": null,\n        \"points\": 0,\n        \"created_at\": null,\n        \"updated_at\": null\n    }\n}\n",
+                            "name": "Object fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Return invitation token for logged user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/user\/getInvitationToken",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/user\/getInvitationToken"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"invitationToken\": \"5rZd84ES0iS3F7aHjSH0\"\n}\n",
+                            "name": "Object fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Upload user avatar",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/user\/uploadAvatar",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/user\/uploadAvatar"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "avatar",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"status\": \"success\",\n    \"message\": \"User avatar updated!\",\n    \"avatar_url\": \"http:\/\/quiz.test\/storage\/user-avatar\/F8fpXWsZSOI62QrVceWWMRdqrKPWwZf8APuAzPvY.png\"\n}\n",
+                            "name": "Avatar updated"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"avatar\": [\n            {\n                \"min_width\": \"The avatar width cannot be less than 100px\",\n                \"min_height\": \"The avatar height cannot be less than 100px\",\n                \"max_width\": \"The avatar width cannot be greater than 600px\",\n                \"max_height\": \"The avatar height cannot be greater than 600px\"\n            }\n        ]\n    }\n}\n",
+                            "name": "Avatar no updated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get user plan",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/user\/getPlan",
+                            "query": [
+                                {
+                                    "key": "user_id",
+                                    "value": "0",
+                                    "description": "Specify user id to get his plans",
+                                    "disabled": true
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/\/user\/getPlan?user_id=0"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"id\": 1,\n    \"subscriber_type\": \"App\\\\Models\\\\User\",\n    \"subscriber_id\": 1,\n    \"plan_id\": 1,\n    \"slug\": \"main\",\n    \"name\": \"main\",\n    \"description\": null,\n    \"trial_ends_at\": \"2022-04-09T17:01:54.000000Z\",\n    \"starts_at\": \"2022-04-09T17:01:54.000000Z\",\n    \"ends_at\": \"2121-04-09T17:01:54.000000Z\",\n    \"cancels_at\": null,\n    \"canceled_at\": null,\n    \"timezone\": null,\n    \"created_at\": \"2022-04-09T17:01:54.000000Z\",\n    \"updated_at\": \"2022-04-09T17:01:54.000000Z\",\n    \"deleted_at\": null\n}\n",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get list of invited users",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/user\/getInvitedUsers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/user\/getInvitedUsers"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 4,\n            \"name\": \"Jannnn\",\n            \"is_premium\": true\n        }\n    ]\n}\n",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Return user stats",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/user\/stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/user\/stats"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"correct_answers\": 3,\n        \"incorrect_answers\": 1\n    }\n}\n",
+                            "name": "Stats fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Stats not found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Questions",
+            "description": "\nEndpoints about `question` objects",
+            "item": [
+                {
+                    "name": "Get list of question objects",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/questions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/questions"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Also return header response `X-Total-Count` containing the number of fetched objects."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"quiz_id\": 1,\n            \"question\": \"Uto\u017csamiana z rekuz\u0105 i czarn\u0105 polewk\u0105 czernina to zupa na bazie:\",\n            \"correct_answer_id\": 1,\n            \"created_at\": \"2022-03-06T16:22:31.000000Z\",\n            \"updated_at\": \"2022-03-06T16:22:31.000000Z\"\n        },\n        {\n            \"...\": []\n        }\n    ],\n    \"message\": \"Objects fetched\",\n    \"count\": 42\n}\n",
+                            "name": "Question fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store new question",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/questions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/questions"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"question\":\"Kategoria\",\"quiz_id\":\"1\",\"category_id\":\"1\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"question\": \"Kategoria\",\n        \"quiz_id\": 1,\n        \"updated_at\": \"2022-03-06T17:23:30.000000Z\",\n        \"created_at\": \"2022-03-06T17:23:30.000000Z\",\n        \"id\": 43\n    },\n    \"message\": \"Object created.\"\n}\n",
+                            "name": "Question created"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Return specific question by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/questions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/questions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 2,\n        \"quiz_id\": 1,\n        \"question\": \"\u017burek od bia\u0142ego barszczu r\u00f3\u017cni si\u0119 przede wszystkim:\",\n        \"correct_answer_id\": 5,\n        \"created_at\": \"2022-03-06T16:22:31.000000Z\",\n        \"updated_at\": \"2022-03-06T16:22:31.000000Z\"\n    },\n    \"message\": \"Object fetched.\"\n}\n",
+                            "name": "Question fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Question not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update specific question by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/questions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/questions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"question\":\"Kategoria\",\"category_id\":\"1\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 304,
+                            "body": "No content",
+                            "name": "Question not updated"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 43,\n        \"quiz_id\": 1,\n        \"question\": \"Kategoria\",\n        \"correct_answer_id\": null,\n        \"created_at\": \"2022-03-06T17:23:30.000000Z\",\n        \"updated_at\": \"2022-03-06T17:25:10.000000Z\"\n    },\n    \"message\": \"Object updated.\"\n}\n",
+                            "name": "Question fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete specific question by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/questions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/questions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "[Empty response]",
+                            "name": "Question deleted"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Question not found"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n    \"message\": \"Something is wrong. Please check your request\"\n}\n",
+                            "name": "Bad Request"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get list of answers belongs to question",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/questions\/:id\/answers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/questions\/:id\/answers",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Also return header response `X-Total-Count` containing the number of fetched objects."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"quiz_id\": 1,\n            \"question\": \"Uto\u017csamiana z rekuz\u0105 i czarn\u0105 polewk\u0105 czernina to zupa na bazie:\",\n            \"correct_answer_id\": 1,\n            \"created_at\": \"2022-03-06T16:22:31.000000Z\",\n            \"updated_at\": \"2022-03-06T16:22:31.000000Z\"\n        },\n        {\n            \"...\": []\n        }\n    ],\n    \"message\": \"Objects fetched\",\n    \"count\": 42\n}\n",
+                            "name": "Question fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete answers belongs to question",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/questions\/:id\/answers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/questions\/:id\/answers",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Also return header response `X-Total-Count` containing the number of deleted objects."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "[Empty response]",
+                            "name": "Question deleted"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Question not found"
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n    \"message\": \"Something is wrong. Please check your request\"\n}\n",
+                            "name": "Bad Request"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Quiz",
+            "description": "",
+            "item": [
+                {
+                    "name": "Start quiz",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quiz\/:quiz\/start",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quiz\/:quiz\/start",
+                            "variable": [
+                                {
+                                    "id": "quiz",
+                                    "key": "quiz",
+                                    "value": "2",
+                                    "description": "The ID of the Quiz."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"submission_id\": 4,\n        \"next_question\": {\n            \"id\": 14,\n            \"question\": \"Zwini\u0119ty w rulon marynowany \u015bled\u017a to:\",\n            \"answers\": [\n                {\n                    \"id\": 52,\n                    \"answer\": \"Rolmops\"\n                },\n                {\n                    \"id\": 53,\n                    \"answer\": \"Pikiel\"\n                },\n                {\n                    \"id\": 54,\n                    \"answer\": \"Zwijka\"\n                },\n                {\n                    \"id\": 55,\n                    \"answer\": \"Sa\u0142aka\"\n                }\n            ]\n        }\n    }\n}\n",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Answer question",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quiz\/submission\/:quiz_submission\/answerQuestion",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quiz\/submission\/:quiz_submission\/answerQuestion",
+                            "variable": [
+                                {
+                                    "id": "quiz_submission",
+                                    "key": "quiz_submission",
+                                    "value": "2",
+                                    "description": "The ID of the Quiz Submission."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"question_id\":15,\"answer_id\":1}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"submission_id\": 1,\n        \"is_correct\": 1,\n        \"next_question\": {\n            \"id\": 14,\n            \"question\": \"Zwini\u0119ty w rulon marynowany \u015bled\u017a to:\",\n            \"answers\": [\n                {\n                    \"id\": 52,\n                    \"answer\": \"Rolmops\"\n                },\n                {\n                    \"id\": 53,\n                    \"answer\": \"Pikiel\"\n                },\n                {\n                    \"id\": 54,\n                    \"answer\": \"Zwijka\"\n                },\n                {\n                    \"id\": 55,\n                    \"answer\": \"Sa\u0142aka\"\n                }\n            ]\n        }\n    }\n}\n",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized\",\n    \"data\": \"You cannot do this\"\n}\n",
+                            "name": "Unathorized"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Quizzes",
+            "description": "\nEndpoints about `quiz` objects",
+            "item": [
+                {
+                    "name": "Get list of quiz objects",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quizzes",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quizzes"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Also return header response `X-Total-Count` containing the number of fetched objects."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"category_id\": 1,\n            \"title\": \"Jak dobrze znasz kuchni\u0119 polsk\u0105?\",\n            \"description\": \"Jaka jest Twoja znajomo\u015b\u0107 tradycyjnych polskich potraw?\",\n            \"created_at\": \"2022-04-05T18:32:52.000000Z\",\n            \"updated_at\": \"2022-04-05T18:32:52.000000Z\"\n        },\n        {\n            \"...\": []\n        }\n    ],\n    \"message\": \"Objects fetched\",\n    \"count\": 4\n}\n",
+                            "name": "Quiz fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store new quiz",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quizzes",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quizzes"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "category_id",
+                                    "value": 2,
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "title",
+                                    "value": "Quiz title",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Quiz description",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "image",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"category_id\": \"2\",\n        \"title\": \"Quiz title\",\n        \"description\": \"Opis quizu\",\n        \"image_path\": \"\\\"image_path\\\": \\\"ZWOHE9x8tECor79BosSvF9efGKoeKoJg10gpMwyl.png\\\",\",\n        \"updated_at\": \"2022-04-06T21:07:49.000000Z\",\n        \"created_at\": \"2022-04-06T21:07:49.000000Z\",\n        \"id\": 5\n    },\n    \"message\": \"Object created.\"\n}\n",
+                            "name": "Quiz created"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Return specific quiz by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quizzes\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quizzes\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "2",
+                                    "description": "The ID of the quiz."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 2,\n        \"category_id\": 1,\n        \"title\": \"Czy wiesz, co jesz?\",\n        \"description\": \"Czy znasz nazwy klasycznych i mniej klasycznych potraw?\",\n        \"created_at\": \"2022-04-05T18:32:52.000000Z\",\n        \"updated_at\": \"2022-04-05T18:32:52.000000Z\"\n    },\n    \"message\": \"Object fetched.\"\n}\n",
+                            "name": "Quiz fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Quiz not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update specific quiz by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quizzes\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quizzes\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the quiz."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "category_id",
+                                    "value": 2,
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "title",
+                                    "value": "Quiz title",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Quiz description",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "image",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 304,
+                            "body": "No content",
+                            "name": "Quiz not updated"
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 2,\n        \"category_id\": 2,\n        \"title\": \"Quiz title\",\n        \"description\": \"Quiz description\",\n        \"created_at\": \"2022-04-05T18:32:52.000000Z\",\n        \"updated_at\": \"2022-04-06T21:24:16.000000Z\",\n        \"category\": {\n            \"id\": 2,\n            \"name\": \"Zwierz\u0119ta\",\n            \"created_at\": \"2022-04-05T18:32:52.000000Z\",\n            \"updated_at\": \"2022-04-05T18:32:52.000000Z\"\n        }\n    },\n    \"message\": \"Object updated.\"\n}\n",
+                            "name": "Quiz fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n    \"message\": \"The given data was invalid.\",\n    \"errors\": {\n        \"field\": [\n            \"validation message error\"\n        ],\n        \"...\": []\n    }\n}\n",
+                            "name": "Validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete specific quiz by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quizzes\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quizzes\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "2",
+                                    "description": "The ID of the quiz."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "[Empty response]",
+                            "name": "Quiz deleted"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Quiz not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get list of questions belongs to quiz",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quizzes\/:id\/questions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quizzes\/:id\/questions",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the quiz."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Also return header response `X-Total-Count` containing the number of fetched objects."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"quiz_id\": 1,\n            \"question\": \"Uto\u017csamiana z rekuz\u0105 i czarn\u0105 polewk\u0105 czernina to zupa na bazie:\",\n            \"correct_answer_id\": 1,\n            \"created_at\": \"2022-03-06T16:22:31.000000Z\",\n            \"updated_at\": \"2022-03-06T16:22:31.000000Z\"\n        },\n        {\n            \"...\": []\n        }\n    ],\n    \"message\": \"Objects fetched\",\n    \"count\": 42\n}\n",
+                            "name": "Question fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}\n",
+                            "name": "Unauthenticated"
+                        }
+                    ]
+                },
+                {
+                    "name": "Return specific quiz by ID",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/quiz\/:quiz",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/quiz\/:quiz",
+                            "variable": [
+                                {
+                                    "id": "quiz",
+                                    "key": "quiz",
+                                    "value": "1",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "2",
+                                    "description": "The ID of the quiz."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 2,\n        \"category_id\": 1,\n        \"title\": \"Czy wiesz, co jesz?\",\n        \"description\": \"Czy znasz nazwy klasycznych i mniej klasycznych potraw?\",\n        \"created_at\": \"2022-04-05T18:32:52.000000Z\",\n        \"updated_at\": \"2022-04-05T18:32:52.000000Z\"\n    },\n    \"message\": \"Object fetched.\"\n}\n",
+                            "name": "Quiz fetched"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"message\": \"Resource not found\"\n}\n",
+                            "name": "Quiz not found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Settings",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display user settings.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/user\/settings",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/user\/settings"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"personal\": {\n        \"name\": \"zxc\",\n        \"surname\": null,\n        \"email\": \"test@example.com\",\n        \"phone\": \"111 225 111\"\n    },\n    \"company\": {\n        \"name\": \"TEST2\",\n        \"nip\": \"8213622586\",\n        \"regon\": \"236170890\",\n        \"address\": {\n            \"id\": 4,\n            \"addressable_type\": \"App\\\\Models\\\\Company\",\n            \"addressable_id\": 3,\n            \"city\": \"asdasd2\",\n            \"postcode\": \"22-222\",\n            \"street\": \"asdasdcxz\",\n            \"building_number\": \"55\",\n            \"house_number\": \"12\",\n            \"created_at\": \"2022-04-19T18:42:02.000000Z\",\n            \"updated_at\": \"2022-04-19T19:16:10.000000Z\"\n        }\n    },\n    \"financial\": {\n        \"iban\": \"PL65802510332533324434431256\",\n        \"bank_name\": \"BANK MILLENIUM SA\",\n        \"swift\": \"BIGBPLPW\"\n    }\n}\n",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update user settings.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/user\/settings",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/user\/settings"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"quo\",\"surname\":\"omnis\",\"email\":\"cletus.feil@example.net\",\"phone\":[\"559\"],\"company_name\":\"ducimus\",\"city\":\"zg\",\"street\":\"\",\"building_number\":\"heqw\",\"house_number\":\"v\",\"bank_name\":\"asperiores\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"personal\": {\n            \"name\": \"zxc\",\n            \"surname\": null,\n            \"email\": \"test@example.com\",\n            \"phone\": \"111 225 111\"\n        },\n        \"company\": {\n            \"name\": \"TEST2\",\n            \"nip\": \"8213622586\",\n            \"regon\": \"236170890\",\n            \"address\": {\n                \"city\": \"asdasd2\",\n                \"postcode\": \"22-222\",\n                \"street\": \"asdasdcxz\",\n                \"building_number\": \"55\",\n                \"house_number\": \"12\"\n            }\n        },\n        \"financial\": {\n            \"bank_name\": \"BANK MILLENIUM SA\",\n            \"iban\": \"PL65802510332533324434431256\",\n            \"swift\": \"BIGBPLPW\"\n        }\n    }\n}\n",
+                            "name": "Success"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer"
+    }
+}
